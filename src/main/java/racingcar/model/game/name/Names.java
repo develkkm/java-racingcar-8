@@ -1,5 +1,6 @@
 package racingcar.model.game.name;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,12 +49,17 @@ public final class Names {
     }
 
     private void validateNoDuplicates(List<Name> names) {
-        Set<String> distinct = names.stream()
-                .map(Name::name)
-                .collect(Collectors.toSet());
-        if (distinct.size() != names.size()) {
+        boolean hasDuplicate = checkDuplicate(names);
+        if (hasDuplicate) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
+    }
+
+    private static boolean checkDuplicate(List<Name> names) {
+        Set<String> seen = new HashSet<>();
+        return names.stream()
+                .map(Name::name)
+                .anyMatch(n -> !seen.add(n));
     }
 
     public List<Name> asList() {
