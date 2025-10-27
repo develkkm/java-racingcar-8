@@ -6,9 +6,9 @@ import racingcar.dto.ResultDto;
 import racingcar.dto.RoundDto;
 
 public class OutputView {
-
     private static final String EXECUTION_RESULT_MESSAGE = "실행 결과";
     private static final String WINNER_PREFIX = "최종 우승자 : ";
+    private static final String CAR_DISTANCE_SYMBOL = "-";
 
     public void printResultMessage() {
         printBlankLine();
@@ -33,7 +33,7 @@ public class OutputView {
     }
 
     private String formatCarProgress(CarDto car) {
-        return String.format("%s : %s", car.name(), "-".repeat(car.distance()));
+        return String.format("%s : %s", car.name(), CAR_DISTANCE_SYMBOL.repeat(car.distance()));
     }
 
     public void printWinners(ResultDto result) {
