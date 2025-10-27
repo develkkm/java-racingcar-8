@@ -1,7 +1,9 @@
 package racingcar.model.game.round;
 
 public class Round {
-    private static final String INVALID_ROUND_MESSAGE = "시도 횟수는 1 이상이어야 합니다.";
+    private static final String EMPTY_INPUT_ERROR_MESSAGE = "시도 횟수는 비어있으면 안됩니다.";
+    private static final String NON_NUMERIC_ERROR_MESSAGE = "시도 횟수는 숫자로 입력해야 합니다.";
+    private static final String INVALID_RANGE_ERROR_MESSAGE = "시도 횟수는 1 이상이어야 합니다.";
 
     private final int totalRounds;
     private int currentRound = 0;
@@ -19,7 +21,7 @@ public class Round {
 
     private static void validateEmpty(String input) {
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException(INVALID_ROUND_MESSAGE);
+            throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
         }
     }
 
@@ -27,13 +29,13 @@ public class Round {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_ROUND_MESSAGE);
+            throw new IllegalArgumentException(NON_NUMERIC_ERROR_MESSAGE);
         }
     }
 
     private void validate(int totalRounds) {
         if (totalRounds < 1) {
-            throw new IllegalArgumentException(INVALID_ROUND_MESSAGE);
+            throw new IllegalArgumentException(INVALID_RANGE_ERROR_MESSAGE);
         }
     }
 
